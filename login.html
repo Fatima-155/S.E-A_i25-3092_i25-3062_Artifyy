@@ -1,1 +1,1150 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTIFY - Kawaii Login</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ffe6f2 0%, #ffd1dc 100%);
+            color: #ff6699;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Cute floating elements */
+        .floating-heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff99cc;
+            animation: float 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-heart:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { top: 20%; right: 10%; animation-delay: 0.5s; }
+        .floating-heart:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 1s; }
+        .floating-heart:nth-child(4) { bottom: 20%; right: 20%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 50px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 100;
+            border-bottom: 3px solid #ffccdd;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            font-family: 'Comic Neue', cursive;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #ff66aa;
+            text-shadow: 2px 2px 0 #ffccdd;
+        }
+
+        .logo-icon {
+            margin-right: 15px;
+            font-size: 32px;
+            color: #ff66aa;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ff6699;
+            font-weight: 700;
+            font-family: 'Comic Neue', cursive;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 10px;
+        }
+
+        nav a::before {
+            content: '🌸';
+            position: absolute;
+            left: -25px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #ff99cc;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #ff3388;
+            transform: scale(1.1);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-bar {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .search-icon {
+            font-size: 24px;
+            color: #ff66aa;
+            transition: all 0.3s;
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(255, 102, 170, 0.2);
+        }
+
+        .search-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+            color: #ff3388;
+        }
+
+        .search-input {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 0;
+            padding: 0;
+            border: none;
+            background: white;
+            color: #ff6699;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            box-shadow: 0 5px 15px rgba(255, 102, 170, 0.2);
+        }
+
+        .search-bar:hover .search-input {
+            width: 250px;
+            padding: 12px 20px;
+            opacity: 1;
+            margin-top: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            position: relative;
+            min-height: 80vh;
+        }
+
+        .hero-title {
+            font-family: 'Comic Neue', cursive;
+            font-size: 68px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ff3388;
+            text-shadow: 3px 3px 0 #ffccdd;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::before {
+            content: '✨';
+            position: absolute;
+            left: -50px;
+            top: -10px;
+            font-size: 40px;
+        }
+
+        .hero-title::after {
+            content: '✨';
+            position: absolute;
+            right: -50px;
+            top: -10px;
+            font-size: 40px;
+        }
+
+        /* Interactive Login Box */
+        .login-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .login-wrapper:hover {
+            width: 420px;
+            height: 520px;
+            transform: scale(1.05);
+        }
+
+        .box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            z-index: 10;
+            background: white;
+        }
+
+        .box::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ffb6c1, #ff99cc, #ff66aa, #ffccdd, #ffb6c1);
+            background-size: 400%;
+            filter: drop-shadow(0 15px 30px rgba(255, 102, 170, 0.3));
+            border-radius: 25px;
+            animation: rotating 4s linear infinite;
+            animation-delay: -1s;
+            z-index: -1;
+        }
+
+        .box::after {
+            content: "";
+            position: absolute;
+            inset: 5px;
+            background: white;
+            border-radius: 20px;
+            border: 8px solid #ffccdd;
+            z-index: -1;
+        }
+
+        @keyframes rotating {
+            0%, 100% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+        }
+
+        .login-container {
+            position: absolute;
+            inset: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            opacity: 0;
+            transform: scale(0.8) rotate(-5deg);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+            z-index: 20;
+            border: 3px solid #ffccdd;
+        }
+
+        .login-wrapper:hover .login-container {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .login-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 45px;
+            color: #ff66aa;
+            transition: all 0.4s ease;
+            z-index: 15;
+            background: white;
+            padding: 20px;
+            border-radius: 50%;
+            border: 5px solid #ffccdd;
+            box-shadow: 0 10px 20px rgba(255, 102, 170, 0.2);
+        }
+
+        .login-wrapper:hover .login-icon {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5) rotate(360deg);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+            transform: translateY(20px) scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .login-wrapper:hover .form-group {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .login-wrapper:hover .form-group:nth-child(1) { transition-delay: 0.3s; }
+        .login-wrapper:hover .form-group:nth-child(2) { transition-delay: 0.4s; }
+        .login-wrapper:hover .form-group:nth-child(3) { transition-delay: 0.5s; }
+        .login-wrapper:hover .form-group:nth-child(4) { transition-delay: 0.6s; }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-family: 'Comic Neue', cursive;
+            font-size: 20px;
+            color: #ff66aa;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        label::before {
+            content: '🌸';
+            position: absolute;
+            left: 0;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 16px 25px;
+            background: #fff5f8;
+            border: 3px solid #ffccdd;
+            border-radius: 20px;
+            font-size: 16px;
+            color: #ff6699;
+            transition: all 0.3s ease;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        input[type="email"]::placeholder,
+        input[type="password"]::placeholder {
+            color: #ffb6c1;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #ff99cc;
+            background: white;
+            box-shadow: 0 0 20px rgba(255, 153, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Remember Me & Options */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            transform: translateY(20px) scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .login-wrapper:hover .form-options {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            transition-delay: 0.7s;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ff66aa;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #ff99cc;
+            cursor: pointer;
+            border: 2px solid #ffccdd;
+            border-radius: 5px;
+        }
+
+        .forgot-pass {
+            color: #ff66aa;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: #fff5f8;
+        }
+
+        .forgot-pass:hover {
+            color: #ff3388;
+            background: #ffccdd;
+            transform: scale(1.1);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #ff99cc, #ff66aa);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 20px;
+            font-weight: 700;
+            font-family: 'Comic Neue', cursive;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateY(20px) scale(0.9);
+            opacity: 0;
+            box-shadow: 0 10px 20px rgba(255, 102, 170, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .login-wrapper:hover .submit-btn {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            transition-delay: 0.8s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 102, 170, 0.4);
+            background: linear-gradient(45deg, #ff66aa, #ff99cc);
+        }
+
+        /* Social Login */
+        .social-login {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            transform: translateY(20px) scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .login-wrapper:hover .social-login {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            transition-delay: 0.9s;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 3px solid #ffccdd;
+            color: #ff66aa;
+            font-size: 22px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 102, 170, 0.2);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 25px rgba(255, 102, 170, 0.3);
+        }
+
+        .google-btn:hover {
+            background: #ffccdd;
+            border-color: #ff99cc;
+            color: #ff3388;
+        }
+
+        .facebook-btn:hover {
+            background: #ffccdd;
+            border-color: #ff99cc;
+            color: #ff3388;
+        }
+
+        /* Signup Link */
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #ff66aa;
+            font-size: 16px;
+            transform: translateY(20px) scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+            font-weight: 600;
+        }
+
+        .login-wrapper:hover .signup-link {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            transition-delay: 1s;
+        }
+
+        .signup-link a {
+            color: #ff3388;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background: #fff5f8;
+        }
+
+        .signup-link a:hover {
+            color: #ff0066;
+            background: #ffccdd;
+            transform: scale(1.1);
+        }
+
+        /* Kawaii Decorations */
+        .kawaii-decoration {
+            position: absolute;
+            font-size: 30px;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        .decoration-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .decoration-2 { top: 15%; right: 8%; animation-delay: 0.3s; }
+        .decoration-3 { bottom: 20%; left: 10%; animation-delay: 0.6s; }
+        .decoration-4 { bottom: 15%; right: 12%; animation-delay: 0.9s; }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            75% { transform: rotate(-15deg); }
+        }
+
+        /* Footer Styles */
+        footer {
+            background: white;
+            padding: 40px 50px;
+            margin-top: auto;
+            border-top: 5px solid #ffccdd;
+            box-shadow: 0 -5px 15px rgba(255, 182, 193, 0.2);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-logo h2 {
+            font-family: 'Comic Neue', cursive;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #ff66aa;
+            font-size: 28px;
+        }
+
+        .footer-logo p {
+            color: #ff99cc;
+            font-size: 16px;
+            font-style: italic;
+            padding-left: 45px;
+        }
+
+        .footer-columns {
+            flex: 2;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-column {
+            min-width: 150px;
+        }
+
+        .footer-column h4 {
+            font-family: 'Comic Neue', cursive;
+            margin-bottom: 20px;
+            color: #ff66aa;
+            font-size: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #ffccdd;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 15px;
+            color: #ff99cc;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .footer-column li::before {
+            content: '🎀';
+            position: absolute;
+            left: -25px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .footer-column li:hover::before {
+            opacity: 1;
+        }
+
+        .footer-column li:hover {
+            color: #ff3388;
+            transform: translateX(15px);
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            border: 5px solid #ffccdd;
+            box-shadow: 0 20px 40px rgba(255, 102, 170, 0.4);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-message.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .success-message i {
+            font-size: 70px;
+            color: #ff66aa;
+            margin-bottom: 25px;
+            animation: heartBeat 1s ease infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .success-message h3 {
+            font-family: 'Comic Neue', cursive;
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ff66aa;
+        }
+
+        .success-message p {
+            color: #ff99cc;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-title::before,
+            .hero-title::after {
+                display: none;
+            }
+
+            .login-wrapper:hover {
+                width: 350px;
+                height: 480px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-columns {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .login-wrapper:hover {
+                width: 320px;
+                height: 460px;
+            }
+
+            .footer-columns {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Hearts -->
+    <div class="floating-heart">💖</div>
+    <div class="floating-heart">💕</div>
+    <div class="floating-heart">💗</div>
+    <div class="floating-heart">💓</div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-paint-brush logo-icon"></i>
+            ARTIFY
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Shop</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#" id="contactLink">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-actions">
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search cute art...">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Kawaii Decorations -->
+        <div class="kawaii-decoration decoration-1">🌸</div>
+        <div class="kawaii-decoration decoration-2">🍭</div>
+        <div class="kawaii-decoration decoration-3">🎀</div>
+        <div class="kawaii-decoration decoration-4">🐰</div>
+        
+        <h1 class="hero-title">Unleash Your Cuteness!</h1>
+        
+        <div class="login-wrapper">
+            <div class="box"></div>
+            <div class="login-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            
+            <div class="login-container">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Enter Your E-mail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your Password" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember" style="padding-left: 0;">Remember Me</label>
+                    </div>
+                    <a href="#" class="forgot-pass">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="loginBtn">Login 💖</button>
+                
+                <div class="social-login">
+                    <a href="#" class="social-btn google-btn" title="Login with Google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="#" class="social-btn facebook-btn" title="Login with Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+                
+                <div class="signup-link">
+                    Not Registered Yet? <a href="#">Create An Account</a> 💕
+                </div>
+            </div>
+        </div>
+        
+        <p style="margin-top: 30px; color: #ff99cc; text-align: center; font-family: 'Comic Neue', cursive; font-size: 18px;">
+            🐰 Hover over the heart to expand login form! 🍭
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>
+                    <i class="fas fa-paint-brush"></i>
+                    ARTIFY
+                </h2>
+                <p>unleash your inner kawaii artist 💝</p>
+            </div>
+            
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>NAVIGATE 🌸</h4>
+                    <ul>
+                        <li>Home</li>
+                        <li>Shop</li>
+                        <li>About</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>SUPPORT 🎀</h4>
+                    <ul>
+                        <li>Shipping</li>
+                        <li>FAQ</li>
+                        <li>Help Centre</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>LEGAL 📝</h4>
+                    <ul>
+                        <li>Privacy Policy</li>
+                        <li>Term of Service</li>
+                        <li>Cookies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Message Popup -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-heart"></i>
+        <h3>Yay! Login Successful! 🎉</h3>
+        <p>Redirecting to contact page...</p>
+        <p style="margin-top: 10px; font-size: 14px; color: #ff99cc;">
+            Login data sent to: i253092@isb.nu.edu.pk 💌
+        </p>
+    </div>
+
+    <script>
+        // Simulated user database for demo
+        const demoUsers = {
+            "kawaii@artify.com": "cute123",
+            "pink@artify.com": "pink123",
+            "hello@artify.com": "kawaii123"
+        };
+
+        // Handle login
+        document.getElementById('loginBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember').checked;
+            
+            if (!email || !password) {
+                alert('💖 Please enter both email and password! 💖');
+                return;
+            }
+            
+            // Check if user exists in demo database
+            if (demoUsers[email] && demoUsers[email] === password) {
+                // Prepare login data
+                const loginData = {
+                    email: email,
+                    password: password,
+                    rememberMe: rememberMe,
+                    timestamp: new Date().toISOString(),
+                    ip: "127.0.0.1",
+                    userAgent: navigator.userAgent
+                };
+                
+                console.log('🎀 Kawaii Login successful! Data:', loginData);
+                
+                // Show success message
+                const successMessage = document.getElementById('successMessage');
+                successMessage.classList.add('active');
+                
+                // Add kawaii celebration
+                for(let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.innerHTML = '💖';
+                        heart.style.position = 'fixed';
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.top = '100vh';
+                        heart.style.fontSize = '25px';
+                        heart.style.animation = `fall ${Math.random() * 2 + 2}s linear forwards`;
+                        document.body.appendChild(heart);
+                        
+                        setTimeout(() => heart.remove(), 3000);
+                    }, i * 200);
+                }
+                
+                // Add falling animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fall {
+                        0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+                        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Simulate sending data to email
+                setTimeout(() => {
+                    console.log(`💌 Login data sent to: i253092@isb.nu.edu.pk`);
+                }, 1000);
+                
+                // Redirect after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'contact-page.html';
+                }, 3000);
+                
+            } else {
+                alert('❌ Invalid email or password. Try: kawaii@artify.com / cute123 🐰');
+            }
+        });
+        
+        // Enter key support for login
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginBtn').click();
+            }
+        });
+        
+        // Social login buttons
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.classList.contains('google-btn') ? 'Google' : 'Facebook';
+                alert(`🌈 Redirecting to ${platform} authentication...\n\nLogin data will be sent to i253092@isb.nu.edu.pk 🍭`);
+            });
+        });
+        
+        // Forgot password
+        document.querySelector('.forgot-pass').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt('🌸 Enter your email to reset password:');
+            if (email) {
+                alert(`💌 Password reset link sent to ${email}\n\nCheck your inbox! 🎀`);
+                console.log(`Password reset requested for: ${email}`);
+                console.log(`Reset notification sent to: i253092@isb.nu.edu.pk`);
+            }
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                alert(`🔍 Searching for: ${this.value}`);
+                this.value = '';
+                this.blur();
+            }
+        });
+        
+        // Contact link
+        document.getElementById('contactLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('🌸 Go to contact page? You need to login first! 🐰')) {
+                document.querySelector('.login-wrapper').style.animation = 'bounce 1s';
+                setTimeout(() => {
+                    document.querySelector('.login-wrapper').style.animation = '';
+                }, 1000);
+            }
+        });
+        
+        // Add bounce animation for login wrapper
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Auto-fill demo credentials on hover
+        const loginWrapper = document.querySelector('.login-wrapper');
+        let demoFilled = false;
+        
+        loginWrapper.addEventListener('mouseenter', function() {
+            if (!demoFilled) {
+                setTimeout(() => {
+                    if (!document.getElementById('email').value) {
+                        document.getElementById('email').value = 'kawaii@artify.com';
+                        document.getElementById('password').value = 'cute123';
+                        demoFilled = true;
+                        
+                        // Add cute notification
+                        const notification = document.createElement('div');
+                        notification.innerHTML = '🐰 Demo credentials filled! 🍭';
+                        notification.style.position = 'fixed';
+                        notification.style.bottom = '20px';
+                        notification.style.right = '20px';
+                        notification.style.background = '#ff66aa';
+                        notification.style.color = 'white';
+                        notification.style.padding = '15px 25px';
+                        notification.style.borderRadius = '20px';
+                        notification.style.fontFamily = "'Comic Neue', cursive";
+                        notification.style.zIndex = '1000';
+                        notification.style.boxShadow = '0 5px 15px rgba(255, 102, 170, 0.3)';
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            notification.style.opacity = '0';
+                            notification.style.transform = 'translateY(20px)';
+                            setTimeout(() => notification.remove(), 300);
+                        }, 2000);
+                    }
+                }, 500);
+            }
+        });
+        
+        // Add click effect to buttons
+        document.querySelectorAll('button, .social-btn, a').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.tagName === 'A' && this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+                
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+        
+        // Add ripple animation
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+    </script>
+</body>
+</html>
