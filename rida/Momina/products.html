@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastel Pages - Beautiful Stationery</title>
     <style>
-        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -53,7 +52,7 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
+       
         header {
             background-color: white;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -230,8 +229,6 @@
             max-width: 600px;
             margin: 0 auto;
         }
-
-        /* Products Section */
         .section-title {
             text-align: center;
             margin-bottom: 30px;
@@ -293,8 +290,6 @@
         .add-to-cart:hover {
             background-color: #ff9eb0;
         }
-
-        /* Cart Page */
         .cart-container {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -449,8 +444,6 @@
         .place-order-btn:hover {
             background-color: #c97bc9;
         }
-
-        /* Footer */
         footer {
             background-color: white;
             padding: 40px 0 20px;
@@ -484,8 +477,6 @@
             border-top: 1px solid #eee;
             color: #777;
         }
-
-        /* Responsive Styles */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -1004,48 +995,44 @@
                     page.classList.remove('active');
                 });
                 
-                // Show login page
+             
                 document.getElementById('login-page').classList.add('active');
             });
             
-            // Proceed to checkout functionality
             proceedCheckoutBtn.addEventListener('click', function() {
-                // Hide all pages
+               
                 pages.forEach(page => {
                     page.classList.remove('active');
                 });
                 
-                // Show checkout page
+               
                 document.getElementById('checkout-page').classList.add('active');
             });
             
-            // Add to cart functionality
+           
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     cartItems++;
                     cartCount.textContent = cartItems;
-                    
-                    // Show a simple notification
                     alert(${this.getAttribute('data-name')} added to cart!);
                 });
             });
             
-            // Login form submission
+         
             document.getElementById('login-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Hide all pages
+               
                 pages.forEach(page => {
                     page.classList.remove('active');
                 });
                 
-                // Show home page after login
-                document.getElementById('home-page').classList.add('active');
                 
-                // Change login button to user profile
+                document.getElementById('home-page').classList.add('active');
                 loginBtn.textContent = 'My Account';
             });
         });
     </script>
 </body>
+
 </html>
