@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastel Pages - Beautiful Stationery</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ffb6c1;
+            --secondary: #b0e0e6;
+            --accent: #dda0dd;
+            --light: #fff9fc;
+            --dark: #333;
+            --gray: #f5f5f5;
+            --text: #444;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Page Styles */
+        .page {
+            display: none;
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .login-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-card h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .login-btn {
+            background-color: var(--accent);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: #c97bc9;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 180px;
+            background-color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff9eb0;
+        }
+
+        /* Cart Page */
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .cart-items {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-details {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            background-color: var(--gray);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 12px;
+        }
+
+        .item-info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .item-price {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background-color: var(--gray);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .order-summary {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .order-summary h2 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-top: 10px;
+        }
+
+        .checkout-btn {
+            background-color: var(--accent);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            background-color: #c97bc9;
+        }
+
+        /* Checkout Page */
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .checkout-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .checkout-section h2 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
+        }
+
+        .place-order-btn {
+            background-color: var(--accent);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .place-order-btn:hover {
+            background-color: #c97bc9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #777;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .cart-container,
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Pastel<span>Pages</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="products">Products</a></li>
+                        <li><a href="#" class="nav-link" data-page="cart">Cart</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <div class="cart-icon" id="cart-icon">
+                        <span>🛒</span>
+                        <span class="cart-count">0</span>
+                    </div>
+                    <button id="login-btn">Login</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Login Page -->
+        <section id="login-page" class="page">
+            <div class="login-container">
+                <div class="login-card">
+                    <h1>Welcome Back!</h1>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="login-btn">Login</button>
+                    </form>
+                    <div class="signup-link">
+                        Don't have an account? <a href="#">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="hero">
+                <h1>Inspire Your Creativity</h1>
+                <p>Discover our exquisite collection of stationery designed to bring beauty and joy to your everyday tasks.</p>
+            </div>
+
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Elegant Pastel</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Muskecox Set</h3>
+                        <div class="product-price">PKR 3.4</div>
+                        <button class="add-to-cart" data-id="1" data-name="Elegant Pastel" data-price="3.4">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Minimalist Gel Pen</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Minimalist Gel Pen Collection</h3>
+                        <div class="product-price">PKR 1.5</div>
+                        <button class="add-to-cart" data-id="2" data-name="Minimalist Gel Pen" data-price="1.5">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Washi Tape</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Aesthetic Washi Tape Bundle</h3>
+                        <div class="product-price">PKR 1.2</div>
+                        <button class="add-to-cart" data-id="3" data-name="Aesthetic Washi Tape" data-price="1.2">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Sticky Notes</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Soft Tone Sticky Notes</h3>
+                        <div class="product-price">PKR 7</div>
+                        <button class="add-to-cart" data-id="4" data-name="Soft Tone Sticky Notes" data-price="7">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Editor's Picks</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Vintage Floral</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Vintage Floral Journal</h3>
+                        <div class="product-price">PKR 2.9</div>
+                        <button class="add-to-cart" data-id="5" data-name="Vintage Floral Journal" data-price="2.9">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Pencil Case</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Greenstick Pencil Case</h3>
+                        <div class="product-price">PKR 1.5</div>
+                        <button class="add-to-cart" data-id="6" data-name="Greenstick Pencil Case" data-price="1.5">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Stump Kit</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Customizable Stump Kit</h3>
+                        <div class="product-price">PKR 3.5</div>
+                        <button class="add-to-cart" data-id="7" data-name="Customizable Stump Kit" data-price="3.5">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Brush Set</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Watercolor Brush Set</h3>
+                        <div class="product-price">PKR 2.2</div>
+                        <button class="add-to-cart" data-id="8" data-name="Watercolor Brush Set" data-price="2.2">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Page -->
+        <section id="products-page" class="page">
+            <h1 class="section-title">Explore Our Stationery Categories</h1>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Notebooks & Journals</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Notebooks & Journals</h3>
+                        <button class="add-to-cart" data-id="9" data-name="Notebooks & Journals" data-price="15">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Pens & Pencils</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pens & Pencils</h3>
+                        <button class="add-to-cart" data-id="10" data-name="Pens & Pencils" data-price="12">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Art Supplies</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Art Supplies</h3>
+                        <button class="add-to-cart" data-id="11" data-name="Art Supplies" data-price="25">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Planners & Organizers</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Planners & Organizers</h3>
+                        <button class="add-to-cart" data-id="12" data-name="Planners & Organizers" data-price="20">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Our Top Sellers</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">Pastel Dream Planner</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pastel Dream Planner</h3>
+                        <div class="product-price">PKR 23</div>
+                        <button class="add-to-cart" data-id="13" data-name="Pastel Dream Planner" data-price="23">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Enchanting Gel Pen Set</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Enchanting Gel Pen Set</h3>
+                        <div class="product-price">PKR 110</div>
+                        <button class="add-to-cart" data-id="14" data-name="Enchanting Gel Pen Set" data-price="110">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Minimalist Note Cards</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Minimalist Note Cards</h3>
+                        <div class="product-price">PKR 120</div>
+                        <button class="add-to-cart" data-id="15" data-name="Minimalist Note Cards" data-price="120">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">Vintage Sticker Collection</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Vintage Sticker Collection</h3>
+                        <div class="product-price">PKR 111</div>
+                        <button class="add-to-cart" data-id="16" data-name="Vintage Sticker Collection" data-price="111">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Page -->
+        <section id="cart-page" class="page">
+            <h1 class="section-title">Your Shopping Cart</h1>
+            
+            <div class="cart-container">
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <div class="item-image">Elegant Pastel</div>
+                            <div class="item-info">
+                                <h3>Elegant Pastel Notebook</h3>
+                                <div class="item-price">PKR 12</div>
+                            </div>
+                        </div>
+                        <div class="item-quantity">
+                            <span class="quantity-btn">-</span>
+                            <span>1</span>
+                            <span class="quantity-btn">+</span>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <div class="item-image">Gel Pen</div>
+                            <div class="item-info">
+                                <h3>Smooth Gel Pen Set</h3>
+                                <div class="item-price">PKR 17</div>
+                            </div>
+                        </div>
+                        <div class="item-quantity">
+                            <span class="quantity-btn">-</span>
+                            <span>2</span>
+                            <span class="quantity-btn">+</span>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <div class="item-image">Washi Tape</div>
+                            <div class="item-info">
+                                <h3>Decorative Washi Tape</h3>
+                                <div class="item-price">PKR 21</div>
+                            </div>
+                        </div>
+                        <div class="item-quantity">
+                            <span class="quantity-btn">-</span>
+                            <span>3</span>
+                            <span class="quantity-btn">+</span>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="item-details">
+                            <div class="item-image">Planner</div>
+                            <div class="item-info">
+                                <h3>Minimalist Planner 2024</h3>
+                                <div class="item-price">PKR 99</div>
+                            </div>
+                        </div>
+                        <div class="item-quantity">
+                            <span class="quantity-btn">-</span>
+                            <span>1</span>
+                            <span class="quantity-btn">+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>PKR 208</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>PKR 10</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Taxes</span>
+                        <span>PKR 10</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span>PKR 228</span>
+                    </div>
+                    <button class="checkout-btn" id="proceed-checkout">Proceed to Checkout</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Page -->
+        <section id="checkout-page" class="page">
+            <h1 class="section-title">Complete Your Order</h1>
+            
+            <div class="checkout-container">
+                <div>
+                    <div class="checkout-section">
+                        <h2>Payment Details</h2>
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" value="4242 4242 4242 4242">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry-month">Expiry Month</label>
+                                <input type="text" id="expiry-month" value="08">
+                            </div>
+                            <div class="form-group">
+                                <label for="expiry-year">Expiry Year</label>
+                                <input type="text" id="expiry-year" value="2027">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" value="123">
+                            </div>
+                            <div class="form-group">
+                                <label for="card-type">Card Type</label>
+                                <input type="text" id="card-type" value="Visa">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name-on-card">Name on Card</label>
+                            <input type="text" id="name-on-card" value="Pastel User">
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-section">
+                        <h2>Shipping Address</h2>
+                        <div class="form-group">
+                            <label for="address-line1">Address Line 1</label>
+                            <input type="text" id="address-line1" value="123 Pastel Lane">
+                        </div>
+                        <div class="form-group">
+                            <label for="address-line2">Address Line 2 (Optional)</label>
+                            <input type="text" id="address-line2" value="Apr 48">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" value="Islamabad">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State / Province</label>
+                                <input type="text" id="state" value="Punjab">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zip">Zip / Postal Code</label>
+                                <input type="text" id="zip" value="46606">
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" id="country" value="Pakistan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="checkout-section">
+                        <h2>Order Summary</h2>
+                        <div class="cart-item">
+                            <div class="item-details">
+                                <div class="item-image">Planner</div>
+                                <div class="item-info">
+                                    <h3>Pastel Planner Set</h3>
+                                    <div class="item-price">PKR 25</div>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <span>Qty: 1</span>
+                            </div>
+                        </div>
+                        <div class="cart-item">
+                            <div class="item-details">
+                                <div class="item-image">Gel Pen</div>
+                                <div class="item-info">
+                                    <h3>Mint Gel Pens (6-pack)</h3>
+                                    <div class="item-price">PKR 50</div>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <span>Qty: 2</span>
+                            </div>
+                        </div>
+                        <div class="cart-item">
+                            <div class="item-details">
+                                <div class="item-image">Sticky Notes</div>
+                                <div class="item-info">
+                                    <h3>Aesthetic Sticky Notes</h3>
+                                    <div class="item-price">PKR 7</div>
+                                </div>
+                            </div>
+                            <div class="item-quantity">
+                                <span>Qty: 1</span>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>PKR 82</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>PKR 5</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Taxes (Est.)</span>
+                            <span>PKR 3</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Order Total</span>
+                            <span>PKR 90</span>
+                        </div>
+                        
+                        <button class="place-order-btn">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pastel Pages</h3>
+                    <p>Discover joy in every page. Your destination for elegant and inspiring stationery.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Made with love by Fast Islamabad</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const loginBtn = document.getElementById('login-btn');
+            const proceedCheckoutBtn = document.getElementById('proceed-checkout');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            
+            // Initialize cart count
+            let cartItems = 0;
+            
+            // Navigation functionality
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show target page
+                    document.getElementById(${targetPage}-page).classList.add('active');
+                });
+            });
+            
+            // Login button functionality
+            loginBtn.addEventListener('click', function() {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show login page
+                document.getElementById('login-page').classList.add('active');
+            });
+            
+            // Proceed to checkout functionality
+            proceedCheckoutBtn.addEventListener('click', function() {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show checkout page
+                document.getElementById('checkout-page').classList.add('active');
+            });
+            
+            // Add to cart functionality
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    cartItems++;
+                    cartCount.textContent = cartItems;
+                    
+                    // Show a simple notification
+                    alert(${this.getAttribute('data-name')} added to cart!);
+                });
+            });
+            
+            // Login form submission
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show home page after login
+                document.getElementById('home-page').classList.add('active');
+                
+                // Change login button to user profile
+                loginBtn.textContent = 'My Account';
+            });
+        });
+    </script>
+</body>
+</html>

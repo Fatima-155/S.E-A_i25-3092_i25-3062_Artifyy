@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Categories - Artify & Co.</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- Global Theme & Reset --- */
+        :root {
+            --pastel-peach: #ffb7b2;
+            --pastel-mint: #b5ead7;
+            --pastel-lavender: #c7ceea;
+            --pastel-blue: #bae1ff;
+            --pastel-yellow: #ffdfba;
+            --bg-color: #fff9f9;
+            --text-dark: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding-top: 80px; /* Space for fixed navbar */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Animated Background Shapes --- */
+        .bg-shape {
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s infinite alternate;
+        }
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--pastel-peach);
+            top: -100px;
+            left: -100px;
+        }
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--pastel-mint);
+            bottom: 10%;
+            right: -50px;
+            animation-delay: -5s;
+        }
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--pastel-lavender);
+            top: 40%;
+            left: 20%;
+            animation-duration: 25s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(30px, 50px) rotate(10deg); }
+        }
+
+        /* --- Navbar (Consistent with Home) --- */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--pastel-peach) !important;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0 15px !important;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--pastel-peach);
+        }
+        .badge-cart {
+            background-color: var(--pastel-peach);
+            color: white;
+        }
+        .nav-pfp {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border: 2px solid var(--pastel-peach);
+            padding: 2px;
+            transition: transform 0.2s;
+        }
+        .nav-pfp:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Page Title --- */
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            align-self: center;
+        }
+        .page-title h2 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 6px;
+            background: linear-gradient(to right, var(--pastel-peach), var(--pastel-lavender));
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        /* --- Category Cards --- */
+        .category-card {
+            border: none;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        /* Card Colors (Cyclical) */
+        .cat-bg-peach { background: linear-gradient(135deg, #fff0f0 0%, #ffe4e1 100%); }
+        .cat-bg-mint { background: linear-gradient(135deg, #f0fff9 0%, #e0f2f1 100%); }
+        .cat-bg-lavender { background: linear-gradient(135deg, #f3f0ff 0%, #e8eaf6 100%); }
+        .cat-bg-blue { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); }
+        .cat-bg-yellow { background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%); }
+
+        .category-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        /* Specific Icon Colors */
+        .text-peach { color: var(--pastel-peach); }
+        .text-mint { color: var(--pastel-mint); }
+        .text-lavender { color: var(--pastel-lavender); }
+        .text-blue { color: #90caf9; }
+        .text-yellow { color: #ffcc80; }
+
+        .category-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-count {
+            font-size: 0.85rem;
+            color: #888;
+            opacity: 0.8;
+        }
+
+        /* Hover Effects */
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .category-card:hover .category-icon-wrapper {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: white;
+            margin-top: auto;
+            padding: 40px 0;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a class="navbar-brand" href="home.html">
+                <i class="fa-solid fa-pen-nib me-2"></i>Artify
+            </a>
+
+            <!-- Links Centered -->
+            <ul class="nav mx-auto flex-row gap-3">
+                <li class="nav-item"><a class="nav-link px-2" href="home.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link active px-2" href="categories.html">Categories</a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="topsellers.html">Top Sellers</a></li>
+            </ul>
+            
+            <!-- Right Side -->
+            <div class="d-flex align-items-center gap-3">
+                <a class="nav-link position-relative me-2" href="cart.html">
+                    <i class="fa-solid fa-cart-shopping fs-5"></i>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-cart">
+                        2
+                    </span>
+                </a>
+                <a href="#" class="text-decoration-none">
+                    <img src="assets/img/pfp.jpeg" alt="Profile" class="rounded-circle nav-pfp shadow-sm" onerror="this.src='https://placehold.co/50x50/ffb7b2/white?text=Me'">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-5 d-flex flex-column">
+        
+        <div class="page-title animate__animated animate__fadeInDown">
+            <h2>Browse Categories</h2>
+        </div>
+
+        <!-- Categories Grid -->
+        <div class="row g-4 justify-content-center">
+
+            <!-- 1. Pens & Pencils -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-peach" onclick="alert('Navigating to Pens...')">
+                    <div class="category-icon-wrapper text-peach">
+                        <i class="fa-solid fa-pen-fancy"></i>
+                    </div>
+                    <h5 class="category-name">Pens & Pencils</h5>
+                    <span class="category-count">120+ Items</span>
+                </div>
+            </div>
+
+            <!-- 2. Notebooks -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-mint" onclick="alert('Navigating to Notebooks...')">
+                    <div class="category-icon-wrapper text-mint">
+                        <i class="fa-solid fa-book-journal-whills"></i>
+                    </div>
+                    <h5 class="category-name">Notebooks</h5>
+                    <span class="category-count">85+ Items</span>
+                </div>
+            </div>
+
+            <!-- 3. Art Supplies -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-lavender" onclick="alert('Navigating to Art Supplies...')">
+                    <div class="category-icon-wrapper text-lavender">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h5 class="category-name">Art Supplies</h5>
+                    <span class="category-count">200+ Items</span>
+                </div>
+            </div>
+
+            <!-- 4. Office Supplies -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-blue" onclick="alert('Navigating to Office Supplies...')">
+                    <div class="category-icon-wrapper text-blue">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </div>
+                    <h5 class="category-name">Office Supplies</h5>
+                    <span class="category-count">50+ Items</span>
+                </div>
+            </div>
+
+            <!-- 5. Sticky Notes -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-yellow" onclick="alert('Navigating to Sticky Notes...')">
+                    <div class="category-icon-wrapper text-yellow">
+                        <i class="fa-solid fa-note-sticky"></i>
+                    </div>
+                    <h5 class="category-name">Sticky Notes</h5>
+                    <span class="category-count">45 Colors</span>
+                </div>
+            </div>
+
+            <!-- 6. Highlighters -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-peach" onclick="alert('Navigating to Highlighters...')">
+                    <div class="category-icon-wrapper text-peach">
+                        <i class="fa-solid fa-highlighter"></i>
+                    </div>
+                    <h5 class="category-name">Highlighters</h5>
+                    <span class="category-count">30 Sets</span>
+                </div>
+            </div>
+
+            <!-- 7. Files & Folders -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-mint" onclick="alert('Navigating to Folders...')">
+                    <div class="category-icon-wrapper text-mint">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <h5 class="category-name">Files & Folders</h5>
+                    <span class="category-count">60+ Items</span>
+                </div>
+            </div>
+
+            <!-- 8. Diaries & Journals -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-lavender" onclick="alert('Navigating to Diaries...')">
+                    <div class="category-icon-wrapper text-lavender">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h5 class="category-name">Diaries</h5>
+                    <span class="category-count">Premium</span>
+                </div>
+            </div>
+
+            <!-- 9. Markers -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-blue" onclick="alert('Navigating to Markers...')">
+                    <div class="category-icon-wrapper text-blue">
+                        <i class="fa-solid fa-marker"></i>
+                    </div>
+                    <h5 class="category-name">Markers</h5>
+                    <span class="category-count">Sketch & Paint</span>
+                </div>
+            </div>
+
+            <!-- 10. Craft Materials -->
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="category-card cat-bg-yellow" onclick="alert('Navigating to Craft...')">
+                    <div class="category-icon-wrapper text-yellow">
+                        <i class="fa-solid fa-scissors"></i>
+                    </div>
+                    <h5 class="category-name">Craft Materials</h5>
+                    <span class="category-count">DIY Kits</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <h4 class="fw-bold" style="color: var(--pastel-peach)">Artify</h4>
+            <p class="text-muted mb-4">Making your desk the happiest place on earth.</p>
+            <div class="mb-4">
+                <a href="#" class="mx-2 text-secondary"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                <a href="#" class="mx-2 text-secondary"><i class="fa-brands fa-pinterest fa-lg"></i></a>
+                <a href="#" class="mx-2 text-secondary"><i class="fa-brands fa-twitter fa-lg"></i></a>
+            </div>
+            <small class="text-muted"> Made with love by Fast Islamabad</small>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Optional: Add click ripple effect -->
+    <script>
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Add simple ripple or interaction
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>

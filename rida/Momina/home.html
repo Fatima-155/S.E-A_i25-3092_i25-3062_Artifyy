@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Artify & Co.</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- Global Styles --- */
+        :root {
+            --primary-pastel: #ffb7b2; /* Soft Salmon */
+            --secondary-pastel: #b5ead7; /* Mint */
+            --accent-pastel: #c7ceea; /* Lavender */
+            --bg-color: #fff9f9; /* Pinkish White */
+            --text-dark: #4a4a4a;
+            --soft-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-pastel) !important;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0 15px !important;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-pastel);
+        }
+        .badge-cart {
+            background-color: var(--primary-pastel);
+            color: white;
+        }
+        
+        /* Profile Picture Style */
+        .nav-pfp {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border: 2px solid var(--primary-pastel);
+            padding: 2px;
+            transition: transform 0.2s;
+        }
+        .nav-pfp:hover {
+            transform: scale(1.1);
+        }
+
+        /* Buttons */
+        .btn-pastel {
+            background-color: var(--primary-pastel);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-pastel:hover {
+            background-color: #ff9e99;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 183, 178, 0.4);
+            color: white;
+        }
+        .btn-outline-pastel {
+            border: 2px solid var(--primary-pastel);
+            color: var(--primary-pastel);
+            border-radius: 50px;
+        }
+        .btn-outline-pastel:hover {
+            background-color: var(--primary-pastel);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            color: white;
+            padding: 100px 0;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 60px;
+        }
+
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: var(--soft-shadow);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            background: white;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            background-color: #f8f8f8;
+        }
+        
+        /* Category Tiles */
+        .category-card {
+            text-align: center;
+            padding: 30px;
+            cursor: pointer;
+            height: 100%;
+        }
+        .category-img {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: white;
+            margin-top: auto;
+            padding: 40px 0;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Brand -->
+            <a class="navbar-brand" href="home.html">
+                <i class="fa-solid fa-pen-nib me-2"></i>Artify
+            </a>
+
+            <!-- Links Centered - Always Visible (No Collapse) -->
+            <ul class="nav mx-auto flex-row gap-3">
+                <li class="nav-item"><a class="nav-link active px-2" href="home.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="categories.html">Categories</a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="topsellers.html">Top Sellers</a></li>
+            </ul>
+            
+            <!-- Right Side: Cart + PFP -->
+            <div class="d-flex align-items-center gap-3">
+                <a class="nav-link position-relative me-2" href="cart.html">
+                    <i class="fa-solid fa-cart-shopping fs-5"></i>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-cart">
+                        0
+                    </span>
+                </a>
+                <!-- Profile Picture (Circle) -->
+                <a href="#" class="text-decoration-none">
+                    <img src="assets/img/pfp.jpeg" alt="Profile" class="rounded-circle nav-pfp shadow-sm" onerror="this.src='https://placehold.co/50x50/ffb7b2/white?text=Me'">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown">Creativity Starts on Paper</h1>
+            <p class="lead mb-4 animate__animated animate__fadeInUp">Discover our curated collection of aesthetic stationery, designed to inspire.</p>
+            
+            <div class="row justify-content-center mb-4 animate__animated animate__fadeInUp">
+                <div class="col-md-6">
+                    <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                        <input type="text" class="form-control form-control-lg border-0 ps-4" placeholder="Search for pens, notebooks...">
+                        <button class="btn btn-white bg-white text-primary border-0 pe-4" type="button">
+                            <i class="fa-solid fa-search" style="color: var(--primary-pastel)"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="container mb-5">
+        <h3 class="fw-bold mb-4 text-center" style="color: var(--text-dark)">Shop by Category</h3>
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="card category-card" onclick="window.location.href='categories.html'">
+                    <!-- Replaced Icon with Image Source -->
+                    <img src="assets/img/c1.jpeg" class="category-img" alt="Pens" onerror="this.src='https://placehold.co/100x100/ffb7b2/white?text=Pens'">
+                    <h5>Pens</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card category-card" onclick="window.location.href='categories.html'">
+                    <img src="assets/img/c2.jpeg" class="category-img" alt="Notebooks" onerror="this.src='https://placehold.co/100x100/b5ead7/white?text=Books'">
+                    <h5>Notebooks</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card category-card" onclick="window.location.href='categories.html'">
+                    <img src="assets/img/c3.jpeg" class="category-img" alt="Art" onerror="this.src='https://placehold.co/100x100/c7ceea/white?text=Art'">
+                    <h5>Art</h5>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="card category-card" onclick="window.location.href='categories.html'">
+                    <img src="assets/img/c4.jpeg" class="category-img" alt="Desk" onerror="this.src='https://placehold.co/100x100/ffdfba/white?text=Desk'">
+                    <h5>Desk</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="container mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold">Featured Products</h3>
+            <a href="categories.html" class="text-decoration-none fw-bold" style="color: var(--primary-pastel)">View All <i class="fa-solid fa-arrow-right small"></i></a>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Product 1 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">Best Seller</span>
+                    <img src="assets/img/h1.jpeg" class="card-img-top" alt="Sakura Gel Pen Set" onerror="this.src='https://placehold.co/300x250/ffb7b2/white?text=Gel+Pens'">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fw-bold">Sakura Gel Pen Set</h5>
+                        <p class="text-muted small">Pens</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="fw-bold fs-5" style="color: var(--primary-pastel)">PKR 12.50</span>
+                            <button class="btn btn-sm btn-outline-pastel" onclick="addToCart(1, 'Sakura Gel Pen Set', 12.50, 'assets/img/h1.jpeg')">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <img src="assets/img/h2.jpeg" class="card-img-top" alt="Pastel Dot Journal" onerror="this.src='https://placehold.co/300x250/b5ead7/white?text=Journal'">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fw-bold">Pastel Dot Journal</h5>
+                        <p class="text-muted small">Notebooks</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="fw-bold fs-5" style="color: var(--primary-pastel)">PKR 18.00</span>
+                            <button class="btn btn-sm btn-outline-pastel" onclick="addToCart(2, 'Pastel Dot Journal', 18.00, 'assets/img/h2.jpeg')">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <span class="badge bg-info text-white position-absolute top-0 end-0 m-2">New</span>
+                    <img src="assets/img/h3.jpeg" class="card-img-top" alt="Washi Tape Bundle" onerror="this.src='https://placehold.co/300x250/c7ceea/white?text=Washi+Tape'">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fw-bold">Washi Tape Bundle</h5>
+                        <p class="text-muted small">Accessories</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="fw-bold fs-5" style="color: var(--primary-pastel)">PKR 8.99</span>
+                            <button class="btn btn-sm btn-outline-pastel" onclick="addToCart(3, 'Washi Tape Bundle', 8.99, 'assets/img/h3.jpeg')">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100">
+                    <img src="assets/img/h4.jpeg" class="card-img-top" alt="Highlighter Pack" onerror="this.src='https://placehold.co/300x250/ffdfba/white?text=Highlighters'">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fs-6 fw-bold">Highlighter Pack</h5>
+                        <p class="text-muted small">Pens</p>
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="fw-bold fs-5" style="color: var(--primary-pastel)">PKR 6.50</span>
+                            <button class="btn btn-sm btn-outline-pastel" onclick="addToCart(4, 'Highlighter Pack', 6.50, 'assets/img/h4.jpeg')">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <h4 class="fw-bold" style="color: var(--primary-pastel)">Artify</h4>
+            <p class="text-muted mb-4">Making your desk the happiest place on earth.</p>
+            <div class="mb-4">
+                <a href="#" class="mx-2 text-secondary"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                <a href="#" class="mx-2 text-secondary"><i class="fa-brands fa-pinterest fa-lg"></i></a>
+                <a href="#" class="mx-2 text-secondary"><i class="fa-brands fa-twitter fa-lg"></i></a>
+            </div>
+            <small class="text-muted">Made with love by Fast Islamabad</small>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="cartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Item added to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // --- Cart Logic ---
+        let cart = JSON.parse(localStorage.getItem('stationeryCart')) || [];
+        updateCartCount();
+
+        function addToCart(id, name, price, img) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ id, name, price, img, qty: 1 });
+            }
+            localStorage.setItem('stationeryCart', JSON.stringify(cart));
+            updateCartCount();
+            const toastEl = document.getElementById('cartToast');
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            const badge = document.getElementById('cart-badge');
+            if (badge) badge.innerText = count;
+        }
+    </script>
+</body>
+</html>
